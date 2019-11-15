@@ -1,0 +1,1 @@
+% Script para > Design a program to detect edges using Canny Detector
