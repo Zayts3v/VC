@@ -29,15 +29,19 @@ end
 % Select the type of smoothing
 typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian and median filters\n    (3) Gaussian and Butterworth filters:\n');
 
-if (typeOfSmoothing==1)
-    % Filter parameters
-    width = input('What is the width of the filter ?\n:');
-elseif (typeOfSmoothing==2)
-    % Filter parameters
+% Filtering domain
+filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain:\n');
+
+if (filteringDomain==1)
+    filteringDomain="spatial";
+else
+    filteringDomain="frequency";
+end
+
+% Filter parameters
+if (strcmp(filteringDomain,"spatial"))
     width = input('What is the width of the filter ?\n:');
     standardDeviation = input('What is the standard deviation ?\n:');
 else
-    % Filter parameters
-    width = input('What is the width of the filter ?\n:');
     filterOrder = input('Type the filter order\n:');
 end
