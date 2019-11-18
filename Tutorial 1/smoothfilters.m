@@ -26,18 +26,38 @@ else
     variance = input('What is the variance desired ?\n:');
 end
 
-% Select the type of smoothing
-typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian and median filters\n    (3) Gaussian and Butterworth filters:\n');
-
 % Filtering domain
 filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain:\n');
 
 if (filteringDomain==1)
     filteringDomain="spatial";
+    % Select the type of smoothing
+    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian\n    (3) median filters\n');
+    if (typeOfSmoothing==1)
+        typeOfSmoothing = 'average';
+    elseif (typeOfSmoothing==2)
+        typeOfSmoothing = 'gaussian';
+    elseif (typeOfSmoothing==3)
+        typeOfSmoothing = 'median';
+    else
+        fprintf('Erro');
+        exit();
+    end
 else
     filteringDomain="frequency";
+    % Select the type of smoothing
+    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (3) Butterworth filters\n');
+    if (typeOfSmoothing==1)
+        typeOfSmoothing = 'Gaussian';
+    elseif (typeOfSmoothing==2)
+        typeOfSmoothing = 'butterworth';
+    else
+        fprintf('Erro');
+        exit();
+    end
 end
 
+% Por corrigir ainda
 % Filter parameters
 if (strcmp(filteringDomain,"spatial"))
     width = input('What is the width of the filter ?\n:');
