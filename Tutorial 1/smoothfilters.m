@@ -12,19 +12,26 @@ else
     image = imread(path, 'jpg');
 end
 
-image_greyScale = rgb2gray(image);
+imageGreyScale = rgb2gray(image);
 
 % Select the type of noise
 typeOfNoise = input('Select the type of noise:\n    (1) Salt-an-pepper\n    (2) Gaussian Noise:\n');
 if (typeOfNoise==1)
-    typeOfNoise = "salt-an-pepper";
+    typeOfNoise = "salt & pepper";
     % Ask for the % occurrence
-    occurrence = input('What is the percentage of occurrence desired ?\n:');
-else 
+    noiseArg = input('What is the percentage of occurrence desired ?\n:');
+elseif (typeOfNoise==2)
     typeOfNoise = "gaussian noise";
     % Ask for the variance
-    variance = input('What is the variance desired ?\n:');
+    noiseArg = input('What is the variance desired ?\n:');
+else
+    fprintf('Error');
+    exit;
 end
+
+output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg);
+imshow(output);
+
 
 % Select the type of smoothing
 typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian and median filters\n    (3) Gaussian and Butterworth filters:\n');
