@@ -1,4 +1,4 @@
-function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg)
+function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,typeOfSmooth, smoothArg)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 if (typeOfNoise == "salt & pepper")
@@ -11,6 +11,25 @@ else
     p2 = 0;
     imageGreyScale = im2double(imageGreyScale);
     imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale)) + p2;
+end
+
+if (filteringDomain == "spatial")
+    matrix = ones(smoothArg);
+    if (typeOfSmooth == "average")
+        for i = 1:smoothArg
+            for j = 1:smoothArg
+                matrix(i,j) = 1/(smoothArg*smoothArg);
+            end
+        end
+        imageGreyScale = conv2(imageGreyScale,matrix);
+    elseif (typeOfSmooth == "gaussian")
+        imageGreyScale = imgaussfilt(imageGreyScale,smoothArg);
+    else
+        [p,q] = size(matrix);
+        imageGreyScale = medfilt2(imageGreyScale,[p q]);
+    end
+    
+else
 end
  
 output = imageGreyScale;
