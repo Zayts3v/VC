@@ -29,9 +29,6 @@ else
     exit;
 end
 
-output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg);
-imshow(output);
-
 % Filtering domain
 filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain:\n');
 
@@ -40,11 +37,17 @@ if (filteringDomain==1)
     % Select the type of smoothing
     typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian\n    (3) median filters\n');
     if (typeOfSmoothing==1)
-        typeOfSmoothing = 'average';
+        typeOfSmoothing = "average";
+        
+        smoothArg = input('What is the width desired ?\n:');
     elseif (typeOfSmoothing==2)
-        typeOfSmoothing = 'gaussian';
+        typeOfSmoothing = "gaussian";
+        
+        smoothArg = input('What is the omega desired ?\n:');
     elseif (typeOfSmoothing==3)
-        typeOfSmoothing = 'median';
+        typeOfSmoothing = "median";
+        
+        smoothArg = input('What is the width desired ?\n:');
     else
         fprintf('Erro');
         exit();
@@ -62,6 +65,9 @@ else
         exit();
     end
 end
+
+output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,smoothArg);
+figure(2),imshow(output);
 
 % Por corrigir ainda
 % Filter parameters
