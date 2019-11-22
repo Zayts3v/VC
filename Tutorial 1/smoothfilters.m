@@ -43,7 +43,7 @@ if (filteringDomain==1)
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = "gaussian";
         
-        smoothArg = input('What is the omega desired ?\n:');
+        smoothArg = input('What is the sigma desired ?\n:');
     elseif (typeOfSmoothing==3)
         typeOfSmoothing = "median";
         
@@ -57,9 +57,13 @@ else
     % Select the type of smoothing
     typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (3) Butterworth filters\n');
     if (typeOfSmoothing==1)
-        typeOfSmoothing = 'Gaussian';
+        typeOfSmoothing = 'gaussian';
+        
+        smoothArg = input('What is the sigma desired ?\n:');
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = 'butterworth';
+        
+        smoothArg = input('What is the width desired ?\n:');
     else
         fprintf('Erro');
         exit();
@@ -67,7 +71,7 @@ else
 end
 
 output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,smoothArg);
-figure(2),imshow(output);
+%figure(2),imshow(output);
 
 % Por corrigir ainda
 % Filter parameters
