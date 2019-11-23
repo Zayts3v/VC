@@ -26,7 +26,10 @@ if (filteringDomain == "spatial")
         end
         imageGreyScale = conv2(imageGreyScale,matrix);
     elseif (typeOfSmooth == "gaussian")
-        imageGreyScale = imgaussfilt(imageGreyScale,smoothArg);
+        kernelSize = input('What is the size of your kernel?\n:');
+        
+        h = fspecial('gaussian',kernelSize,smoothArg);
+        imageGreyScale = imfilter(imageGreyScale, h);
     else
         [p,q] = size(matrix);
         imageGreyScale = medfilt2(imageGreyScale,[p q]);
