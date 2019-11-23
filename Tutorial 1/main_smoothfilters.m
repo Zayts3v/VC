@@ -34,7 +34,7 @@ if (filteringDomain == "spatial")
 else
     if (typeOfSmooth == "gaussian")
         f = imageGreyScale;
-        PQ = paddedsize(size(imageGreyScale));
+        PQ = paddedsize(size(f));
         h = fspecial('gaussian',size(PQ),smoothArg);
         F = fft2(double(f), PQ(1), PQ(2));
         H = fft2(double(h), PQ(1), PQ(2));

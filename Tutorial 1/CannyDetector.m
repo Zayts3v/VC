@@ -12,36 +12,23 @@ else
     image = imread(path, 'jpg');
 end
 
-image_greyScale = rgb2gray(image);
+imageGreyScale = rgb2gray(image);
 
-% Select the type of noise
-typeOfNoise = input('Select the type of noise:\n    (1) Salt-an-pepper\n    (2) Gaussian Noise:\n');
-if (typeOfNoise==1)
-    typeOfNoise = "salt-an-pepper";
-    % Ask for the % occurrence
-    occurrence = input('What is the percentage of occurrence desired ?\n:');
-else 
-    typeOfNoise = "gaussian noise";
+typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient\n    (3) Nonmax\n');
+if (typeOfOperation==1)
+    kernelSize = input('What is the size of your kernel?\n:');
+
+    smoothArg = input('What is the sigma you want?\n:');
+    
+    imageGreyScale = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
+elseif (typeOfNoise==2)
+    typeOfOperation = "gaussian noise";
     % Ask for the variance
-    variance = input('What is the variance desired ?\n:');
-end
-
-% Select the type of smoothing
-typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian and median filters\n    (3) Gaussian and Butterworth filters:\n');
-
-% Filtering domain
-filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain:\n');
-
-if (filteringDomain==1)
-    filteringDomain="spatial";
+    noiseArg = input('What is the variance desired ?\n:');
 else
-    filteringDomain="frequency";
+    fprintf('Error');
+    exit;
 end
 
-% Filter parameters
-if (strcmp(filteringDomain,"spatial"))
-    width = input('What is the width of the filter ?\n:');
-    standardDeviation = input('What is the standard deviation ?\n:');
-else
-    filterOrder = input('Type the filter order\n:');
-end
+imshow(imageGreyScale);
+
