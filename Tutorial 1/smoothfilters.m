@@ -57,7 +57,7 @@ if (filteringDomain==1)
 elseif (filteringDomain==2)
     filteringDomain="frequency";
     % Select the type of smoothing
-    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (2) Butterworth filters\n');
+    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n    (2) Butterworth filters\n');
     if (typeOfSmoothing==1)
         typeOfSmoothing = 'gaussian';
         % Falta comtemplar os valores default

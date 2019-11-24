@@ -8,7 +8,7 @@ format = extractAfter(image_path,'.');
 
 if (strcmp(format,'png'))
     image = imread(path, 'png');
-elseif (strcmp(format,'png'))
+elseif (strcmp(format,'jpg'))
     image = imread(path, 'jpg');
 elseif (image_path==1)
     image = imread('smooth_output.jpg', 'jpg');
@@ -17,8 +17,12 @@ else
     exit();
 end
 
-% é preciso está parte???
 imageGreyScale = rgb2gray(image);
+
+noiseArg = input('What is the omega you want for gaussian noise?\n:');
+
+imageGreyScale = im2double(imageGreyScale);
+imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale));
 
 typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient\n    (3) Nonmax\n');
 if (typeOfOperation==1)
