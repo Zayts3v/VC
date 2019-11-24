@@ -13,7 +13,7 @@ else
     imageGreyScale = im2double(imageGreyScale);
     imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale)) + p2;
 end
-
+figure(1),imshow(imageGreyScale);
 B = fft2(imageGreyScale);
 
 if (filteringDomain == "spatial")
@@ -49,6 +49,7 @@ else
         %doing
     end
 end
+figure(2),imshow(imageGreyScale);
 
 C = fft2(imageGreyScale);
 
