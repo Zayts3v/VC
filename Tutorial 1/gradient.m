@@ -1,4 +1,4 @@
-function [output1,output2] = gradient(imageGreyScale)
+function [output1,output2,output3,output4] = gradient(imageGreyScale)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -6,6 +6,8 @@ function [output1,output2] = gradient(imageGreyScale)
 
 [Gmag,Gdir] = imgradient(Gx,Gy);
 
-output1 = Gmag;
-output2 = Gdir;
+output1 = Gx;
+output2 = Gy;
+output3 = Gmag;
+output4 = Gdir;
 end

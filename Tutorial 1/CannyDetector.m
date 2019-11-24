@@ -24,7 +24,7 @@ noiseArg = input('What is the omega you want for gaussian noise?\n:');
 imageGreyScale = im2double(imageGreyScale);
 imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale));
 
-typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient & Nonmax\n    (3) Nonmax\n');
+typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient, Nonmax and Threshold');
 if (typeOfOperation==1)
     kernelSize = input('What is the size of your kernel?\n:');
 
@@ -32,13 +32,16 @@ if (typeOfOperation==1)
     
     imageGreyScale = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
 elseif (typeOfOperation==2)
-    typeOfOperation = "gradient";
     % Ask for the variance
     noiseArg = input('What is the variance desired ?\n:');
     
-    [Gmag,Gdir] = gradient(imageGreyScale);
+    [Gx,Gy,Gmag,Gdir] = gradient(imageGreyScale);
     
     imageGreyScale = nonmax(imageGreyScale,Gx,Gy,Gmag);
+    
+    % Double Threshold
+    
+    % Hysteresis Thresholding
 else
     fprintf('Error');
     exit;
