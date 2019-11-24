@@ -19,10 +19,12 @@ typeOfNoise = input('Select the type of noise:\n    (1) Salt-an-pepper\n    (2) 
 if (typeOfNoise==1)
     typeOfNoise = "salt & pepper";
     % Ask for the % occurrence
+    % Falta comtemplar os valores default
     noiseArg = input('What is the percentage of occurrence desired ?\n:');
 elseif (typeOfNoise==2)
     typeOfNoise = "gaussian noise";
     % Ask for the variance
+    % Falta comtemplar os valores default
     noiseArg = input('What is the variance desired ?\n:');
 else
     fprintf('Error');
@@ -38,15 +40,15 @@ if (filteringDomain==1)
     typeOfSmoothing = input('Select the type of smoothing:\n    (1) Average\n    (2) Gaussian\n    (3) median filters\n');
     if (typeOfSmoothing==1)
         typeOfSmoothing = "average";
-        
+        % Falta comtemplar os valores default
         smoothArg = input('What is the width desired ?\n:');
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = "gaussian";
-        
+        % Falta comtemplar os valores default
         smoothArg = input('What is the sigma desired ?\n:');
     elseif (typeOfSmoothing==3)
         typeOfSmoothing = "median";
-        
+        % Falta comtemplar os valores default
         smoothArg = input('What is the width desired ?\n:');
     else
         fprintf('Erro');
@@ -58,11 +60,11 @@ elseif (filteringDomain==2)
     typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (2) Butterworth filters\n');
     if (typeOfSmoothing==1)
         typeOfSmoothing = 'gaussian';
-        
+        % Falta comtemplar os valores default
         smoothArg = input('What is the sigma desired ?\n:');
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = 'butterworth';
-        
+        % Falta comtemplar os valores default
         smoothArg = input('What is the width desired ?\n:');
     else
         fprintf('Erro');
