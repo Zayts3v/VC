@@ -52,10 +52,10 @@ if (filteringDomain==1)
         fprintf('Erro');
         exit();
     end
-else
+elseif (filteringDomain==2)
     filteringDomain="frequency";
     % Select the type of smoothing
-    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (3) Butterworth filters\n');
+    typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n   (2) Butterworth filters\n');
     if (typeOfSmoothing==1)
         typeOfSmoothing = 'gaussian';
         
@@ -68,6 +68,9 @@ else
         fprintf('Erro');
         exit();
     end
+else
+    fprintf('Erro');
+    exit(); 
 end
 
 output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,smoothArg);
