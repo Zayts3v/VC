@@ -24,21 +24,23 @@ noiseArg = input('What is the omega you want for gaussian noise?\n:');
 imageGreyScale = im2double(imageGreyScale);
 imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale));
 
-typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient\n    (3) Nonmax\n');
+typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient & Nonmax\n    (3) Nonmax\n');
 if (typeOfOperation==1)
     kernelSize = input('What is the size of your kernel?\n:');
 
     smoothArg = input('What is the sigma you want?\n:');
     
     imageGreyScale = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
-elseif (typeOfNoise==2)
-    typeOfOperation = "gaussian noise";
+elseif (typeOfOperation==2)
+    typeOfOperation = "gradient";
     % Ask for the variance
     noiseArg = input('What is the variance desired ?\n:');
+    
+    [Gmag,Gdir] = gradient(imageGreyScale);
+    
+    imageGreyScale = nonmax(imageGreyScale,Gx,Gy,Gmag);
 else
     fprintf('Error');
     exit;
 end
-
-imshow(imageGreyScale);
 
