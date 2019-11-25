@@ -53,7 +53,7 @@ function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
     end
     
     Gmag = NormalizeMatrix(output);
-    %figure; imshow(Gmag);
+    figure(1); imshow(Gmag);
     
     result = Gmag;
 end
