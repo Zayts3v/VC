@@ -1,11 +1,11 @@
-function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
+function result = nonmax(imageGreyScale,Gx,Gy,Gmag,Gdir)
 % Perform non-maximum suppression using interpolation
     [h,w] = size(imageGreyScale);
     output = zeros(h,w);
     for i=2:h-1 % row
         for j=2:w-1 % col
-            if (angle(atan2(i,j))>=0 && angle(atan2(i,j))<=45) || ...
-                    (angle(atan2(i,j))<-135 && angle(atan2(i,j))>=-180)
+            if (Gdir(i,j)>=0 && Gdir(i,j)<=45) || ...
+                    (Gdir(i,j)<-135 && Gdir(i,j)>=-180)
                 yBot = [Gmag(i,j+1) Gmag(i+1,j+1)];
                 yTop = [Gmag(i,j-1) Gmag(i-1,j-1)];
                 x_est = abs(Gy(i,j)/Gmag(i,j)); % y
@@ -15,8 +15,8 @@ function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
                 else
                     output(i,j)=0;
                 end
-            elseif (angle(atan2(i,j))>45 && angle(atan2(i,j))<=90) || ...
-                    (angle(atan2(i,j))<-90 && angle(atan2(i,j))>=-135)
+            elseif (Gdir(i,j)>45 && Gdir(i,j)<=90) || ...
+                    (Gdir(i,j)<-90 && Gdir(i,j)>=-135)
                 yBot = [Gmag(i+1,j) Gmag(i+1,j+1)];
                 yTop = [Gmag(i-1,j) Gmag(i-1,j-1)];
                 x_est = abs(Gx(i,j)/Gmag(i,j));
@@ -26,8 +26,8 @@ function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
                 else
                     output(i,j)=0;
                 end
-            elseif (angle(atan2(i,j))>90 && angle(atan2(i,j))<=135) || ...
-                    (angle(atan2(i,j))<-45 && angle(atan2(i,j))>=-90)
+            elseif (Gdir(i,j)>90 && Gdir(i,j)<=135) || ...
+                    (Gdir(i,j)<-45 && Gdir(i,j)>=-90)
                 yBot = [Gmag(i+1,j) Gmag(i+1,j-1)];
                 yTop = [Gmag(i-1,j) Gmag(i-1,j+1)];
                 x_est = abs(Gx(i,j)/Gmag(i,j));
@@ -37,8 +37,8 @@ function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
                 else
                     output(i,j)=0;
                 end
-            elseif (angle(atan2(i,j))>135 && angle(atan2(i,j))<=180) || ...
-                    (angle(atan2(i,j))<0 && angle(atan2(i,j))>=-45)
+            elseif (Gdir(i,j)>135 && Gdir(i,j)<=180) || ...
+                    (Gdir(i,j)<0 && Gdir(i,j)>=-45)
                 yBot = [Gmag(i,j-1) Gmag(i+1,j-1)];
                 yTop = [Gmag(i,j+1) Gmag(i-1,j+1)];
                 x_est = abs(Gx(i,j)/Gmag(i,j));
@@ -53,7 +53,7 @@ function result = nonmax(imageGreyScale,Gx,Gy,Gmag)
     end
     
     Gmag = NormalizeMatrix(output);
-    figure(1); imshow(Gmag);
+    %figure(1); imshow(Gmag);
     
     result = Gmag;
 end

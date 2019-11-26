@@ -24,29 +24,10 @@ noiseArg = input('What is the omega you want for gaussian noise?\n:');
 imageGreyScale = im2double(imageGreyScale);
 imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale));
 
-typeOfOperation = input('Select what you want to do:\n    (1) Gaussian Smoothing\n    (2) Gradient, Nonmax and Threshold\n');
-if (typeOfOperation==1)
-    kernelSize = input('What is the size of your kernel?\n:');
+[I,I2,I3,I4] = main_CannyDetector(imageGreyScale);
 
-    smoothArg = input('What is the sigma you want?\n:');
-    
-    imageGreyScale = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
-elseif (typeOfOperation==2)
-    % Ask for the variance
-    noiseArg = input('What is the variance desired ?\n:');
-    
-    [Gx,Gy,Gmag,Gdir] = gradient(imageGreyScale);
-    
-    imageGreyScale = nonmax(imageGreyScale,Gx,Gy,Gmag);
-    
-    T1 = input('What is the first value for threshold?\n:');
-    T2 = input('What is the secound value for threshold?\n:');
-    
-    imageGreyScale = double_threshold(imageGreyScale,T1,T2);
-    
-    % Hysteresis Thresholding
-else
-    fprintf('Error');
-    exit;
-end
+figure(1), imshow(I);
+figure(2), imshow(I2);
+figure(3), imshow(I3); 
+figure(4), imshow(I4); 
 
