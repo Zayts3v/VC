@@ -81,12 +81,3 @@ else
 end
 
 output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
-
-% Por corrigir ainda
-% Filter parameters
-if (strcmp(filteringDomain,"spatial"))
-    width = input('What is the width of the filter ?\n:');
-    standardDeviation = input('What is the standard deviation ?\n:');
-else
-    filterOrder = input('Type the filter order\n:');
-end

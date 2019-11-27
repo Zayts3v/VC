@@ -19,19 +19,19 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
 
     if (filteringDomain == "spatial")
 
-        matrix = ones(smoothArg);
+        matrix = ones(a);
         if (typeOfSmooth == "average")
 
-            for i = 1:smoothArg
-                for j = 1:smoothArg
-                    matrix(i,j) = 1/(smoothArg*smoothArg);
+            for i = 1:a
+                for j = 1:a
+                    matrix(i,j) = 1/(a*a);
                 end
             end
             imageGreyScale = conv2(imageGreyScale,matrix);
         elseif (typeOfSmooth == "gaussian")
             kernelSize = input('What is the size of your kernel?\n:');
 
-            h = fspecial('gaussian',kernelSize,smoothArg);
+            h = fspecial('gaussian',kernelSize,a);
             imageGreyScale = imfilter(imageGreyScale, h);
         else
             [p,q] = size(matrix);
@@ -53,7 +53,7 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
         G = fft2(f);
             
         if strcmp(typeOfSmooth, 'gaussian')
-            H = fspecial('gaussian', [P Q], a);
+            H = fspecial('gaussian',[P Q],a);
         elseif strcmp(typeOfSmooth, 'butter')
             H = double(zeros(P,Q));
             filter_order = a;
