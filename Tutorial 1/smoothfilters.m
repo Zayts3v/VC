@@ -51,7 +51,7 @@ if (filteringDomain==1)
         % Falta comtemplar os valores default
         smoothArg = input('What is the width desired ?\n:');
     else
-        fprintf('Erro');
+        fprintf('Error');
         exit();
     end
 elseif (filteringDomain==2)
@@ -67,16 +67,15 @@ elseif (filteringDomain==2)
         % Falta comtemplar os valores default
         smoothArg = input('What is the width desired ?\n:');
     else
-        fprintf('Erro');
+        fprintf('Error');
         exit();
     end
 else
-    fprintf('Erro');
+    fprintf('Error');
     exit(); 
 end
 
 output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,smoothArg);
-%figure(2),imshow(output);
 
 % Por corrigir ainda
 % Filter parameters
