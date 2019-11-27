@@ -19,15 +19,12 @@ end
 
 imageGreyScale = rgb2gray(image);
 
-noiseArg = input('What is the omega you want for gaussian noise?\n:');
-
 imageGreyScale = im2double(imageGreyScale);
-imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale));
+imageGreyScale = imageGreyScale + sqrt(0.01)*randn(size(imageGreyScale));
 
-[I,I2,I3,I4] = main_CannyDetector(imageGreyScale);
+[I,I2,I3] = main_CannyDetector(imageGreyScale);
 
 figure(1), imshow(I);
 figure(2), imshow(I2);
 figure(3), imshow(I3); 
-figure(4), imshow(I4); 
 

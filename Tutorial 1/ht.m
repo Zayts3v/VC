@@ -1,6 +1,5 @@
 function [O,v] = ht(I,v,h,l,i,j)
 
-    [M,N] = size(I);
     v(i,j) = 1;
     
     %inf esquerdo
@@ -8,15 +7,17 @@ function [O,v] = ht(I,v,h,l,i,j)
         if I(i+1,j-1) >= h
             v(i+1,j-1) =1;
         elseif I(i+1,j-1) <= l
-                I(i+1,j-1) = 0
-                v(i+1,j-1) = 1
+                I(i+1,j-1) = 0;
+                v(i+1,j-1) = 1;
         else
-            [T,v] = ht(I,v,h,l,i,j);
+            [I,v] = ht(I,v,h,l,i,j);
         end
     end
     
     if I(i-1,j-1) == 0 && ...
             I(i,j) = 0;
     end
+    
+    O = I;
 
 end

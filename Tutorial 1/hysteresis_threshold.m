@@ -1,30 +1,23 @@
-function result = hysteresis_threshold(imageGreyScale,lo,hi)
+function result = hysteresis_threshold(imageGreyScale,lo,hi,M,N)
 
     I = imageGreyScale;
+    v = zeros(M,N);
 
-    output = ones(size(I,1),size(I,2));
-    b = zeros(size(I,1),size(I,2));
-    Tl = zeros(size(I,1),size(I,2));
-    
-    count = 1;
-    
-    for row = 1:size(I,1)
-        for col = 1:size(I,2)
-            if(I(row,col) >= hi)
-                seeds(count,:) = [row col];
-                count = count + 1;
-                output(row,col) = 255;
-            else
-                if(I(row,col) >= lo)
-                    Tl(row,col) = 1;
+    for i = 1:M
+        for j = 1:N
+            if v(i,j) ~=1
+                if I(i,j) >= hi
+                   v(i,j)=1;
+                elseif I(i,j) <= lo
+                   I(i,j)=0;
+                    v(i,j)=1;
+                else
+                    [I,v]=ht(I,v,h,l,i,j);
                 end
             end
         end
     end
     
-    for i = 1:size(seeds,1)
-        [output b] = testNeighborhood(Tl,b,seeds(i,1),seeds(i,2), output);
-    end
-    %figure(4),imshow([output b]);
-    result = [output b];
+    result = I;
+                    
 end
