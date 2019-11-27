@@ -1,6 +1,6 @@
-function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmooth, smoothArg)
+function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmooth,a,z)
 
-    A = fft2(imageGreyScale);
+    %A = fft2(imageGreyScale);
 
     if (typeOfNoise == "salt & pepper")
         x = rand(size(imageGreyScale));
@@ -15,7 +15,7 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
     end
 
     figure(1),imshow(imageGreyScale);
-    B = fft2(imageGreyScale);
+    %B = fft2(imageGreyScale);
 
     if (filteringDomain == "spatial")
 
@@ -38,24 +38,50 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
             imageGreyScale = medfilt2(imageGreyScale,[p q]);
         end  
     else
-        if (typeOfSmooth == "gaussian")
-
-            f = imageGreyScale;
-            PQ = paddedsize(size(f));
-            h = fspecial('gaussian',size(PQ),smoothArg);
-            F = fft2(double(f), PQ(1), PQ(2));
-            H = fft2(double(h), PQ(1), PQ(2));
-            F_fH = H.*F;
-            ffi = ifft2(F_fH);
-            imageGreyScale = ffi(2:size(f,1)+1, 2:size(f,2)+1);
-            %figure(4),imshow(imageGreyScale);
-        else
-            %doing
+        f = double(imageGreyScale);
+        [M N] = size(f);
+        P = 2*M;
+        Q = 2*N;
+        f = padarray(f,[M N],'post');
+            
+        for i = 1:M
+            for j = 1:N
+                f(i,j) = (-1)^(i+j) * f(i,j);
+            end 
         end
+            
+        G = fft2(f);
+            
+        if strcmp(typeOfSmooth, 'gaussian')
+            H = fspecial('gaussian', [P Q], a);
+        elseif strcmp(typeOfSmooth, 'butter')
+            H = double(zeros(P,Q));
+            filter_order = a;
+            cutoff = z;
+            for i=1:P
+                for j=1:Q
+                    dist = ((i-P/2)^2 + (j-Q/2)^2)^0.5;
+                    H(i,j) = 1 / (1 + (cutoff/dist)^(2*filter_order));
+                end
+            end
+        end
+        
+        G = H .* G;
+        smoothed_image = (ifft2(G));
+        smoothed_image = real(smoothed_image);
+        
+        for i=1:M
+            for j=1:N
+                smoothed_image(i,j) = (-1)^(i+j) * smoothed_image(i,j);
+            end
+        end
+        
+        imageGreyScale = uint8(smoothed_image(1:M, 1:N));
     end
+      
     figure(2),imshow(imageGreyScale);
 
-    C = fft2(imageGreyScale);
+    %C = fft2(imageGreyScale);
 
     %figure(1),imshow(A);
     %figure(2),imshow(B);

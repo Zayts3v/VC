@@ -41,15 +41,18 @@ if (filteringDomain==1)
     if (typeOfSmoothing==1)
         typeOfSmoothing = "average";
         % Falta comtemplar os valores default
-        smoothArg = input('What is the width desired ?\n:');
+        a = input('What is the width desired ?\n:');
+        b = 0;
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = "gaussian";
         % Falta comtemplar os valores default
-        smoothArg = input('What is the sigma desired ?\n:');
+        a = input('What is the sigma desired ?\n:');
+        b = 0;
     elseif (typeOfSmoothing==3)
         typeOfSmoothing = "median";
         % Falta comtemplar os valores default
-        smoothArg = input('What is the width desired ?\n:');
+        a = input('What is the width desired ?\n:');
+        b = 0;
     else
         fprintf('Error');
         exit();
@@ -61,11 +64,13 @@ elseif (filteringDomain==2)
     if (typeOfSmoothing==1)
         typeOfSmoothing = 'gaussian';
         % Falta comtemplar os valores default
-        smoothArg = input('What is the sigma desired ?\n:');
+        a = input('What is the sigma desired ?\n:');
+        b = 0;
     elseif (typeOfSmoothing==2)
-        typeOfSmoothing = 'butterworth';
+        typeOfSmoothing = 'butter';
         % Falta comtemplar os valores default
-        smoothArg = input('What is the width desired ?\n:');
+        a = input('What is the filter order desired ?\n:');
+        b = input('What is the cutoff desired ?\n:');
     else
         fprintf('Error');
         exit();
@@ -75,7 +80,7 @@ else
     exit(); 
 end
 
-output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,smoothArg);
+output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
 
 % Por corrigir ainda
 % Filter parameters
