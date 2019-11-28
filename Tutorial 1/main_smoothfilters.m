@@ -29,9 +29,7 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
             end
             imageGreyScale = conv2(imageGreyScale,matrix);
         elseif (typeOfSmooth == "gaussian")
-            kernelSize = input('What is the size of your kernel?\n:');
-
-            h = fspecial('gaussian',kernelSize,a);
+            h = fspecial('gaussian',b,a);
             imageGreyScale = imfilter(imageGreyScale, h);
         else
             [p,q] = size(matrix);
