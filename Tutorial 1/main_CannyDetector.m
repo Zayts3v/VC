@@ -19,4 +19,3 @@ output1 = Gmag;
 output2 = imageNonMax;
 output3 = result;
 end
-
