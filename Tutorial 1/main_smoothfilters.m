@@ -1,17 +1,19 @@
-function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmooth,a,z)
-
+function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmooth,a,z)
+    
+    noiseImage = imageGreyScale;
     if (typeOfNoise == "salt & pepper")
-        x = rand(size(imageGreyScale));
+        x = rand(size(noiseImage));
         b = find(x < noiseArg/2);
-        imageGreyScale(b) = 0; 
+        noiseImage(b) = 0; 
         p = find(x >= noiseArg/2 & x < noiseArg);
-        imageGreyScale(p) = 255;
+        noiseImage(p) = 255;
     else
         p2 = 0;
-        imageGreyScale = im2double(imageGreyScale);
-        imageGreyScale = imageGreyScale + sqrt(noiseArg)*randn(size(imageGreyScale)) + p2;
+        noiseImage = im2double(noiseImage);
+        noiseImage = noiseImage + sqrt(noiseArg)*randn(size(noiseImage)) + p2;
     end
 
+    smoothImage = noiseImage;
     if (filteringDomain == "spatial")
 
         matrix = ones(a);
@@ -22,16 +24,16 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
                     matrix(i,j) = 1/(a*a);
                 end
             end
-            imageGreyScale = conv2(imageGreyScale,matrix);
+            smoothImage = conv2(smoothImage,matrix);
         elseif (typeOfSmooth == "gaussian")
             h = fspecial('gaussian',z,a);
-            imageGreyScale = imfilter(imageGreyScale, h);
+            smoothImage = imfilter(smoothImage, h);
         else
             [p,q] = size(matrix);
-            imageGreyScale = medfilt2(imageGreyScale,[p q]);
+            smoothImage = medfilt2(smoothImage,[p q]);
         end  
     else
-        f = double(imageGreyScale);
+        f = double(smoothImage);
         [M N] = size(f);
         P = 2*M;
         Q = 2*N;
@@ -72,9 +74,10 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
             end
         end
        
-        imageGreyScale = uint8(smoothed_image(1:M, 1:N));
+        smoothImage = uint8(smoothed_image(1:M, 1:N));
     end
  
-    output = imageGreyScale;
+    output  = noiseImage;
+    output1 = smoothImage;
 end
 

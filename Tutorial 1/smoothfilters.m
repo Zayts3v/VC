@@ -99,6 +99,8 @@ else
     exit();
 end
 
-output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
+[output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
 figure(1), imshow(output)
-imwrite(output,'smooth_output.jpg');
+figure(2), imshow(output1)
+imwrite(output,'Lena_Gaussian_05.png');
+imwrite(output1,'Lena_Gaussian_Spacial_10-5.png');

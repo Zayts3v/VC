@@ -1,6 +1,4 @@
 function [output1,output2,output3,output4] = gradient(imageGreyScale)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
 
     [Gx,Gy] = imgradientxy(imageGreyScale);
 

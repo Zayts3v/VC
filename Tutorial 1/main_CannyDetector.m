@@ -1,6 +1,4 @@
 function [output1,output2,output3] = main_CannyDetector(imageGreyScale)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
 
     kernelSize = input('What is the size of your kernel?\n:');
     smoothArg = input('What is the sigma you want?\n:');
