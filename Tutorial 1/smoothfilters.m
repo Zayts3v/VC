@@ -74,7 +74,7 @@ elseif (filteringDomain==2)
     % Select the type of smoothing
     typeOfSmoothing = input('Select the type of smoothing:\n    (1) Gaussian\n    (2) Butterworth filters\n');
     if (typeOfSmoothing==1)
-        typeOfSmoothing = 'gaussian';
+        typeOfSmoothing = 'Gaussian';
         a = input('What is the sigma desired?\n  Type "-1" for default values\n:');
         if (a==(-1))
             a = 10;

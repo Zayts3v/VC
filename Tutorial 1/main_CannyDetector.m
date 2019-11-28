@@ -1,7 +1,13 @@
 function [output1,output2,output3] = main_CannyDetector(imageGreyScale)
 
-    kernelSize = input('What is the size of your kernel?\n:');
-    smoothArg = input('What is the sigma you want?\n:');
+    kernelSize = input('What is the size of your kernel?\n  Type "-1" for default values\n:');
+    if(kernelSize==(-1))
+        kernelSize = 10;
+    end
+    smoothArg = input('What is the sigma you want?\n  Type "-1" for default values\n:');
+    if(smoothArg==(-1))
+        smoothArg = 10;
+    end
     
     imageSmoothed = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
     [M,N] = size(imageSmoothed);
@@ -10,9 +16,15 @@ function [output1,output2,output3] = main_CannyDetector(imageGreyScale)
     
     imageNonMax = nonmax(imageSmoothed,Gx,Gy,Gmag,Gdir);
     
-    T1 = input('What is the first value for threshold?\n:');
-    T2 = input('What is the secound value for threshold?\n:');
-    
+    T1 = input('What is the first value for threshold?\n  Type "-1" for default values\n:');
+    if(T1==(-1))
+        T1 = 10;
+    end
+    T2 = input('What is the secound value for threshold?\n  Type "-1" for default values\n:');
+    if(T2==(-1))
+        T2 = 10;
+    end
+
     result = hysteresis_threshold(imageNonMax,T1,T2,M,N);
 
 output1 = Gmag;

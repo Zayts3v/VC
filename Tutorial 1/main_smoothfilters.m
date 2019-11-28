@@ -47,8 +47,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
             
         G = fft2(f);
             
-        if strcmp(typeOfSmooth, 'gaussian')
-
+        if strcmp(typeOfSmooth, 'Gaussian')
             H = fspecial('gaussian',[P Q],a);
         elseif strcmp(typeOfSmooth, 'butter')
 
@@ -65,6 +64,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
         end
         
         G = H .* G;
+
         smoothed_image = (ifft2(G));
         smoothed_image = real(smoothed_image);
         
@@ -73,8 +73,11 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
                 smoothed_image(i,j) = (-1)^(i+j) * smoothed_image(i,j);
             end
         end
-       
+
         smoothImage = uint8(smoothed_image(1:M, 1:N));
+        if(typeOfNoise=="gaussian noise")
+            smoothImage = double(smoothImage);
+        end
     end
  
     output  = noiseImage;

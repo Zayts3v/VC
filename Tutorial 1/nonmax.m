@@ -1,5 +1,5 @@
 function result = nonmax(imageGreyScale,Gx,Gy,Gmag,Gdir)
-% Perform non-maximum suppression using interpolation
+    % Perform non-maximum suppression using interpolation
     [h,w] = size(imageGreyScale);
     output = zeros(h,w);
     for i=2:h-1 % row
