@@ -33,14 +33,14 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
             smoothImage = medfilt2(smoothImage,[p q]);
         end  
     else
-        f = double(smoothImage);
+        f = im2double(smoothImage);
         [M N] = size(f);
         P = 2*M;
         Q = 2*N;
         f = padarray(f,[M N],'post');
             
-        for i = 1:M
-            for j = 1:N
+        for i = 1:P
+            for j = 1:Q
                 f(i,j) = (-1)^(i+j) * f(i,j);
             end 
         end
@@ -49,6 +49,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
             
         if strcmp(typeOfSmooth, 'Gaussian')
             H = fspecial('gaussian',[P Q],a);
+            H = mat2gray(H);
         elseif strcmp(typeOfSmooth, 'butter')
 
             H = double(zeros(P,Q));
@@ -58,7 +59,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
             for i=1:P
                 for j=1:Q
                     dist = ((i-P/2)^2 + (j-Q/2)^2)^0.5;
-                    H(i,j) = 1 / (1 + (cutoff/dist)^(2*filter_order));
+                    H(i,j) = 1 / (1 + (dist/cutoff)^(2*filter_order));
                 end
             end
         end
@@ -74,10 +75,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
             end
         end
 
-        smoothImage = uint8(smoothed_image(1:M, 1:N));
-        if(typeOfNoise=="gaussian noise")
-            smoothImage = double(smoothImage);
-        end
+        smoothImage = (smoothed_image(1:M, 1:N));
     end
  
     output  = noiseImage;
