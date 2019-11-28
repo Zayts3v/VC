@@ -29,7 +29,7 @@ function output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteri
             end
             imageGreyScale = conv2(imageGreyScale,matrix);
         elseif (typeOfSmooth == "gaussian")
-            h = fspecial('gaussian',b,a);
+            h = fspecial('gaussian',z,a);
             imageGreyScale = imfilter(imageGreyScale, h);
         else
             [p,q] = size(matrix);
