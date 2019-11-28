@@ -10,7 +10,7 @@ function [O,v] = ht(I,v,high,low,i,j)
                 I(i,j+1) = 0;
                 v(i,j+1) = 1;
         else
-            [I,v] = ht(I,v,high,low,i,j);
+            [I,v] = ht(I,v,high,low,i,j+1);
         end
     end
     
@@ -22,7 +22,7 @@ function [O,v] = ht(I,v,high,low,i,j)
                 I(i+1,j-1) = 0;
                 v(i+1,j-1) = 1;
         else
-            [I,v] = ht(I,v,high,low,i,j);
+            [I,v] = ht(I,v,high,low,i+1,j-1);
         end
     end
     
@@ -34,7 +34,7 @@ function [O,v] = ht(I,v,high,low,i,j)
                 I(i+1,j) = 0;
                 v(i+1,j) = 1;
         else
-            [I,v] = ht(I,v,high,low,i,j);
+            [I,v] = ht(I,v,high,low,i+1,j);
         end
     end
     
@@ -46,7 +46,7 @@ function [O,v] = ht(I,v,high,low,i,j)
                 I(i+1,j+1) = 0;
                 v(i+1,j+1) = 1;
         else
-            [I,v] = ht(I,v,high,low,i,j);
+            [I,v] = ht(I,v,high,low,i+1,j+1);
         end
     end
     
