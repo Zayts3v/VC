@@ -15,7 +15,7 @@ end
 imageGreyScale = rgb2gray(image);
 
 % Select the type of noise
-typeOfNoise = input('Select the type of noise:\n    (1) Salt-an-pepper\n    (2) Gaussian Noise:\n');
+typeOfNoise = input('Select the type of noise:\n    (1) Salt-an-pepper\n    (2) Gaussian Noise\n');
 if (typeOfNoise==1)
     typeOfNoise = "salt & pepper";
     % Ask for the % occurrence
@@ -35,7 +35,7 @@ if(noiseArg == (-1))
 end
 
 % Filtering domain
-filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain:\n');
+filteringDomain = input('Select the filtering domain:\n    (1) Spatial domain\n    (2) Frequency domain\n');
 
 if (filteringDomain==1)
     filteringDomain="spatial";
@@ -45,24 +45,24 @@ if (filteringDomain==1)
         typeOfSmoothing = "average";
         a = input('What is the width desired?\n Type "-1" for default values\n:');
         if (a==(-1))
-            a = 3
+            a = 3;
         end
         b = 0;
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = "gaussian";
-        a = input('What is the sigma desired ?\n  Type "-1" for default values\n:');
+        a = input('What is the sigma desired?\n  Type "-1" for default values\n:');
         if (a==(-1))
-            a = 10
+            a = 10;
         end
-        b = input('What is the size of your kernel?\n  Type "-1" for default values\n:');       
+        b = input('What is the size of your kernel?\n  Type "-1" for default values\n:');
         if (b==(-1))
-            b = 5
+            b = 5;
         end
     elseif (typeOfSmoothing==3)
         typeOfSmoothing = "median";
-        a = input('What is the width desired ?\n  Type "-1" for default values\n:');
+        a = input('What is the width desired?\n  Type "-1" for default values\n:');
         if (a==(-1))
-            a = 3
+            a = 3;
         end
         b = 0;
     else
@@ -77,18 +77,18 @@ elseif (filteringDomain==2)
         typeOfSmoothing = 'gaussian';
         a = input('What is the sigma desired?\n  Type "-1" for default values\n:');
         if (a==(-1))
-            a = 10
+            a = 10;
         end
         b = 0;
     elseif (typeOfSmoothing==2)
         typeOfSmoothing = 'butter';
         a = input('What is the filter order desired?\n  Type "-1" for default values\n:');
         if (a==(-1))
-            a = 20
+            a = 20;
         end
         b = input('What is the cutoff desired?\n  Type "-1" for default values\n:');
         if (b==(-1))
-            b = 5
+            b = 5;
         end
     else
         fprintf('Error');
@@ -96,7 +96,9 @@ elseif (filteringDomain==2)
     end
 else
     fprintf('Error');
-    exit(); 
+    exit();
 end
 
 output = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
+figure(1), imshow(output)
+imwrite(output,'smooth_output.jpg');
