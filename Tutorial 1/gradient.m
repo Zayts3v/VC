@@ -1,7 +1,7 @@
 function [output1,output2,output3,output4] = gradient(imageGreyScale)
 
     [Gx,Gy] = imgradientxy(imageGreyScale);
-
+    
     for i = 1:size(Gx)
         for j = 1:size(Gy)
             Gmag(i,j) = sqrt(double(Gx(i,j)^2 + Gy(i,j)^2));
