@@ -10,7 +10,7 @@ function [output1,output2,output3] = main_CannyDetector(imageGreyScale)
     end
     
     imageSmoothed = Gaussian_smoothing(imageGreyScale,kernelSize,smoothArg);
-    [M,N] = size(imageSmoothed);
+    [M, N] = size(imageSmoothed);
     
     [Gx,Gy,Gmag,Gdir] = gradient(imageSmoothed);
     
@@ -27,7 +27,7 @@ function [output1,output2,output3] = main_CannyDetector(imageGreyScale)
 
     result = hysteresis_threshold(imageNonMax,T1,T2,M,N);
 
-output1 = imageSmoothed;
+output1 = Gmag;
 output2 = imageNonMax;
 output3 = result;
 end
