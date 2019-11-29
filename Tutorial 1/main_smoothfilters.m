@@ -15,7 +15,7 @@ function [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseA
     
     smoothImage = noiseImage;
     if (filteringDomain == "spatial")
-        noiseImage = im2double(noiseImage);
+        smoothImage = im2double(smoothImage);
         matrix = ones(a);
         if (typeOfSmooth == "average")
 
