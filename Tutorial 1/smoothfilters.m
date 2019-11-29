@@ -103,4 +103,4 @@ end
 figure(1), imshow(output)
 figure(2), imshow(output1)
 %imwrite(output,'Lena_Gaussian_0.10.png');
-imwrite(output1,'Lena_Average_Spacial_7.png');
+imwrite(output1,'Lena_Butterworth_Frequency_6-80.png');
