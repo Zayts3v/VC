@@ -102,5 +102,5 @@ end
 [output,output1] = main_smoothfilters(imageGreyScale,typeOfNoise,noiseArg,filteringDomain,typeOfSmoothing,a,b);
 figure(1), imshow(output)
 figure(2), imshow(output1)
-%imwrite(output,'Lena_Gaussian_0.10.png');
-imwrite(output1,'Lena_Butterworth_Frequency_6-80.png');
+imwrite(output,'Lena_Gaussian_0-05.png');
+imwrite(output1,'Lena_Gaussian_Spatial_10-5.png');
