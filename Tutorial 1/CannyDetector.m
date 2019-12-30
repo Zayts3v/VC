@@ -1,6 +1,6 @@
 % Script para > Design a program to detect edges using Canny Detector
 
-image = imread('Input2.png','png');
+image = imread('Lena_Gaussian_0-025.png','png');
 
 [I,I2,I3] = main_CannyDetector(image);
 
