@@ -5,8 +5,8 @@ function result = algorithm(imageGreyScale,typeOfNoise,noiseArg)
     else
         noiseImage = imnoise(imageGreyScale,'gaussian',noiseArg);
     end
-
-
-
+     
+    edgeImage = edge(noiseImage, 'canny');
     
+    result = edgeImage;
 end
