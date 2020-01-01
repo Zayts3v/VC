@@ -37,5 +37,5 @@ end
 
 resultado = algorithm(imageGreyScale,typeOfNoise,noiseArg);
 
-figure(1), imshow(resultado);
+%figure(1), imshow(resultado);
 
