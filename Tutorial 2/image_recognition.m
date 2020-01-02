@@ -7,7 +7,7 @@ if (imagem==1)
 elseif (imagem==2)
     image = imread('Images\coins2.jpg','jpg');
 elseif (imagem==3)
-	image = imread('Images\coins3.jpg','jpg');
+    image = imread('Images\coins3.jpg','jpg');
 else
     fprintf('Error');
     exit;
@@ -38,4 +38,3 @@ end
 resultado = algorithm(imageGreyScale,typeOfNoise,noiseArg);
 
 %figure(1), imshow(resultado);
-

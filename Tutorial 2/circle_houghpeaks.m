@@ -1,7 +1,7 @@
 function peaks = circle_houghpeaks(h, radii, varargin)
 
     params = checkargs(h, radii, varargin{:});
-% smooth the accumulator - xy
+    % smooth the accumulator - xy
     if params.smoothxy > 0
         [m, hsize] = gaussmask1d(params.smoothxy);
     % smooth each dimension separately, with reflection
@@ -11,13 +11,13 @@ function peaks = circle_houghpeaks(h, radii, varargin)
         h = cat(2, h(:,hsize:-1:1,:), h, h(:,end:-1:end-hsize+1,:));
         h = convn(h, reshape(m, 1, length(m), 1), 'valid');
     end
-% smooth the accumulator - r
+    % smooth the accumulator - r
     if params.smoothr > 0
         [m, hsize] = gaussmask1d(params.smoothr);
         h = cat(3, h(:,:,hsize:-1:1), h, h(:,:,end:-1:end-hsize+1));
         h = convn(h, reshape(m, 1, 1, length(m)), 'valid');
     end
-% set threshold
+    % set threshold
     if isempty(params.threshold)
         params.threshold = 0.5 * max(h(:));
     end
@@ -83,18 +83,19 @@ function peaks = circle_houghpeaks(h, radii, varargin)
         peaks([1 2], :) = peaks([1 2], :) - params.margin;
     end
 end
+
 function params = checkargs(h, radii, varargin)
-% Argument checking
+    % Argument checking
     ip = inputParser;
-% required
+    % required
     htest = @(h) validateattributes(h, {'double'}, {'real' 'nonnegative' 'nonsparse'});
     ip.addRequired('h', htest);
     rtest = @(radii) validateattributes(radii, {'double'}, {'real' 'positive' 'vector'});
     ip.addRequired('radii', rtest);
-% optional
+    % optional
     mtest = @(n) validateattributes(n, {'double'}, {'real' 'nonnegative' 'integer' 'scalar'});
     ip.addOptional('margin', 0, mtest); 
-% parameter/value pairs
+    % parameter/value pairs
     stest = @(s) validateattributes(s, {'double'}, {'real' 'nonnegative' 'scalar'});
     ip.addParamValue('smoothxy', 0, stest);
     ip.addParamValue('smoothr', 0, stest);
@@ -107,15 +108,18 @@ function params = checkargs(h, radii, varargin)
     ip.parse(h, radii, varargin{:});
     params = ip.Results;
 end
+
 function [m, hsize] = gaussmask1d(sigma)
-% truncated 1D Gaussian mask
-    hsize = ceil(2.5*sigma);  % reasonable truncation
+    % truncated 1D Gaussian mask
+    hsize = ceil(2.5*sigma);
+    % reasonable truncation
     x = (-hsize:hsize) / (sqrt(2) * sigma);
     m = exp(-x.^2);
     m = m / sum(m);  % normalise
 end
+
 function [r, c, k, v] = max3(h)
-% location and value of global maximum of a 3D array
+    % location and value of global maximum of a 3D array
     [vr, r] = max(h);
     [vc, c] = max(vr);
     [v, k] = max(vc);
