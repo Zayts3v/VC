@@ -5,12 +5,12 @@ imagem = input('Select the image:\n    (1) coins\n    (2) coins2\n    (3) coins3
 if (imagem==1)
     image = imread('Images\coins.jpg','jpg');
 elseif (imagem==2)
-    image = imread('Images\coins2.jpg','jpg');
+    image = imread('Ima4ges\coins2.jpg','jpg');
 elseif (imagem==3)
     image = imread('Images\coins3.jpg','jpg');
 else
-    fprintf('Error');
-    exit;
+    fprintf('Error\n');
+    %exit;
 end
 
 imageGreyScale = rgb2gray(image);
