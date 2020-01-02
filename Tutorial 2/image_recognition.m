@@ -35,7 +35,7 @@ if(noiseArg == (-1))
    noiseArg = 0.05;
 end
 
-resultado = algorithm(imageGreyScale,typeOfNoise,noiseArg);
+resultado = main_image_recognition(imagem,imageGreyScale,typeOfNoise,noiseArg);
 
 %figure(1), imshow(resultado);
 
