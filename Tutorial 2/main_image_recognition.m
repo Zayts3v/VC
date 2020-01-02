@@ -1,13 +1,12 @@
-function result = main_image_recognition(imagetype,imageGreyScale,typeOfNoise,noiseArg)
+function result = main_image_recognition(imageType,imageGreyScale,typeOfNoise,noiseArg)
 
     if (typeOfNoise == "salt & pepper")
         noiseImage = imnoise(imageGreyScale,'salt & pepper',noiseArg);
     else
         noiseImage = imnoise(imageGreyScale,'gaussian',noiseArg);
     end
-     
-    edgeImage = edge(noiseImage, 'canny');
     
+    edgeImage = edge(noiseImage, 'canny');
     if (imageType == 1)
         [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.97);
         
