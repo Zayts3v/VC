@@ -1,28 +1,29 @@
-function result = main_image_recognition(imageType,imageGreyScale,typeOfNoise,noiseArg)
+function result = main_image_recognition(imagetype,imageGreyScale,typeOfNoise,noiseArg)
 
     if (typeOfNoise == "salt & pepper")
         noiseImage = imnoise(imageGreyScale,'salt & pepper',noiseArg);
-        filter = fspecial('average',11);
+        filter = fspecial('average',5);
         filteredImage = imfilter(noiseImage,filter);
     else
         noiseImage = imnoise(imageGreyScale,'gaussian',noiseArg);
-        filteredImage = imgaussfilt(noiseImage,7,'FilterSize',11,'FilterDomain','spatial');
+        filter = imgaussfilt(noiseImage,5,'FilterSize)
+        filteredImage = imfilter(noiseImage,filter);
     end
-
+     
     edgeImage = edge(filteredImage, 'canny');
-
+    
     if (imagetype == 1)
         [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.97);
         
     elseif (imagetype == 2)
-        [centers,radii] = imfindcircles(edgeImage,[180 280],'Sensitivity', 0.97);
-        
+        [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.97);
     else
-        [centers,radii] = imfindcircles(edgeImage,[220 300],'Sensitivity', 0.985);
+        [centers,radii] = imfindcircles(edgeImage,[220 280],'Sensitivity', 0.97);
     end
         
     figure(1),imshowpair(imageGreyScale,edgeImage,'montage');
     viscircles(centers, radii,'EdgeColor','g');
-
+    
+    %figure(2), imshow(edgeImage);
     result = edgeImage;
 end
