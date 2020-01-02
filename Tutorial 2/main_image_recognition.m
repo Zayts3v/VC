@@ -11,20 +11,26 @@ function result = main_image_recognition(original,imagetype,imageGreyScale,typeO
 
     snr = signal_to_noise_ratio(original, noiseImage);
     fprintf("%d", snr);
-    edgeImage = edge(filteredImage, 'canny');
+
+    eqImage = histeq(filteredImage);
+
+    edgeImage = edge(eqImage, 'canny');
 
     if (imagetype == 1)
-        [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.97);
+        [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.96);
         
     elseif (imagetype == 2)
         [centers,radii] = imfindcircles(edgeImage,[180 280],'Sensitivity', 0.97);
         
     else
-        [centers,radii] = imfindcircles(edgeImage,[220 300],'Sensitivity', 0.985);
+        [centers,radii] = imfindcircles(edgeImage,[230 300],'Sensitivity', 0.98);
     end
         
-    figure(1),imshowpair(imageGreyScale,edgeImage,'montage');
+    subplot(2,2,1),imshow(imagem); title('Original image');
     viscircles(centers, radii,'EdgeColor','g');
+    subplot(2,2,2),imshow(edgeImage); title('Image edges');
+    subplot(2,2,3),imhist(eqImage); title('Image histogram');
+    subplot(2,2,4),hist(radii); title('Circles sizes histogram');
 
-    result = edgeImage;
+    result = 1;
 end

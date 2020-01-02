@@ -5,7 +5,7 @@ imagem = input('Select the image:\n    (1) coins\n    (2) coins2\n    (3) coins3
 if (imagem==1)
     image = imread('Images\coins.jpg','jpg');
 elseif (imagem==2)
-    image = imread('Ima4ges\coins2.jpg','jpg');
+    image = imread('Images\coins2.jpg','jpg');
 elseif (imagem==3)
     image = imread('Images\coins3.jpg','jpg');
 else
@@ -36,5 +36,3 @@ if(noiseArg == (-1))
 end
 
 resultado = main_image_recognition(image,imagem,imageGreyScale,typeOfNoise,noiseArg);
-
-%figure(1), imshow(resultado);
