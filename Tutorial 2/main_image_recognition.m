@@ -1,4 +1,4 @@
-function result = main_image_recognition(imageType,imageGreyScale,typeOfNoise,noiseArg)
+function result = main_image_recognition(original,imagetype,imageGreyScale,typeOfNoise,noiseArg)
 
     if (typeOfNoise == "salt & pepper")
         noiseImage = imnoise(imageGreyScale,'salt & pepper',noiseArg);
@@ -9,6 +9,8 @@ function result = main_image_recognition(imageType,imageGreyScale,typeOfNoise,no
         filteredImage = imgaussfilt(noiseImage,7,'FilterSize',11,'FilterDomain','spatial');
     end
 
+    snr = signal_to_noise_ratio(original, noiseImage);
+    fprintf("%d", snr);
     edgeImage = edge(filteredImage, 'canny');
 
     if (imagetype == 1)
