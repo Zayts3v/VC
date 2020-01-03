@@ -10,7 +10,7 @@ elseif (imagem==3)
     image = imread('Images\coins3.jpg','jpg');
 else
     fprintf('Error\n');
-    %exit;
+    exit;
 end
 
 imageGreyScale = rgb2gray(image);
@@ -26,7 +26,7 @@ elseif (typeOfNoise==2)
     % Ask for the variance
     noiseArg = input('What is the variance desired?\n  Type "-1" for default values\n:');
 else
-    fprintf('Error');
+    fprintf('Error\n');
     exit;
 end
 

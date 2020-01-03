@@ -14,23 +14,29 @@ function result = main_image_recognition(original,imagetype,imageGreyScale,typeO
 
     eqImage = histeq(filteredImage);
 
-    edgeImage = edge(eqImage, 'canny');
-
     if (imagetype == 1)
+        edgeImage = edge(filteredImage, 'canny');
+        eqImage = filteredImage;
+        
         [centers,radii] = imfindcircles(edgeImage,[60 100],'Sensitivity', 0.96);
         
     elseif (imagetype == 2)
+        edgeImage = edge(eqImage, 'canny');
+        
         [centers,radii] = imfindcircles(edgeImage,[180 280],'Sensitivity', 0.97);
         
     else
+        edgeImage = edge(eqImage, 'canny');
+        
         [centers,radii] = imfindcircles(edgeImage,[230 300],'Sensitivity', 0.98);
     end
         
-    subplot(2,2,1),imshow(imagem); title('Original image');
+    subplot(2,2,1),imshow(original); title('Original image');
     viscircles(centers, radii,'EdgeColor','g');
-    subplot(2,2,2),imshow(edgeImage); title('Image edges');
-    subplot(2,2,3),imhist(eqImage); title('Image histogram');
-    subplot(2,2,4),hist(radii); title('Circles sizes histogram');
+    subplot(2,2,2),imshow(noiseImage); title('Image with noise');
+    viscircles(centers, radii,'EdgeColor','g');
+    subplot(2,2,3),imshow(eqImage); title('Pre-processed image;');
+    subplot(2,2,4),hist(radii); title('Distribution of object sizes');
 
     result = 1;
 end
